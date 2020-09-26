@@ -1,0 +1,29 @@
+{
+    "name": "htmlboilerplate",
+    "version": "0.1.0",
+    "scripts": {
+        "prebuild:css": "node-sass --include-path scss src/scss/main.scss build/css/main.css",
+        "uglify": "mkdir -p build/js && uglifyjs src/js/*.js -m -o build/js/main.js && uglifyjs src/js/*.js -m -c -o build/js/main.min.js",
+        "imagemin": "imagemin src/img --out-dir=build/img -p",
+        "webp": "find ./ -type f -name '*.jpg' | xargs -P 8 -I {} sh -c 'cwebp -q 75 $1 -o \"${1%.jpg}.webp\"' _ {} ",
+        "build:css": "postcss --use autoprefixer -b 'last 2 versions' < build/css/main.css | postcss --use cssnano --map -o build/css/main.min.css",
+        "build": "npm run build:css",
+        "build:watch": "watch 'npm run build' sass"
+    },
+    "dependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/preset-env": "^7.11.5",
+        "autoprefixer": "^9.8.6",
+        "cssnano": "^4.1.10",
+        "gifsicle": "^5.1.0",
+        "imagemin-cli": "^6.0.0",
+        "node-sass": "^4.14.1",
+        "postcss": "^7.0.32",
+        "postcss-cli": "^7.1.2",
+        "uglify-js": "^3.10.4",
+        "watch": "^1.0.2"
+    },
+    "browserslists": [
+        "IE 11"
+    ]
+}
